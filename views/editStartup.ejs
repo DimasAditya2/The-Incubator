@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Start-Up</title>
+    <!-- fonts google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- end font  -->
+<style>
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f5f5f5;
+}
+
+h1, h3 {
+    text-align: center;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #f2f2f2;
+}
+
+input[type=text], select, input[type=number] {
+  width: 100%;
+  font-size: 1rem;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=text]:hover, input[type=number]:hover, input[type=date]:hover, select:hover {
+    border: 1px solid dodgerblue;
+}
+
+input[type=date] {
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    transform: scale(3); 
+    margin-right: 10px;
+    
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: dodgerblue;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 14px 20px;
+  margin: 30px 0 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.4s ease-in;
+}
+
+input[type=submit]:hover {
+  background-color: darkblue;
+  color: #ccc;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<h1>Edit StartUp</h1>
+
+<div class="container">
+  <form action="/incubators/<%= incubator.id %>/startUp/<%= startup.id %>/edit" method="post">
+    <% if(errors) { %>
+      <ul>
+        <% errors.split(',').forEach(el => { %>
+            <li><%= el %></li>
+       <% }); %>
+      </ul>
+     <% } %>
+    <label for="name">Start-Up Name</label>
+    <input type="text" id="name" name="name" value="<%= startup.startUpName %>">
+
+    <label for="founder">Founder Name</label>
+    <input type="text" id="founder" name="founder" value="<%= startup.founderName %>">
+
+    <label for="date">Date Found</label>
+    <input type="date" name="date" id="date" value="<%= Date.now(); %>">
+
+    <label for="education">Education</label>
+  
+    <select name="education" id="education">
+      <option value="SMK">SMK/SMA</option>
+      <option value="S1">S1</option>
+      <option value="S2">S2</option>
+      <option value="S3">S3</option>
+    </select>
+
+    <label for="valuation">Valuation</label>
+    <input type="number" id="valuation" name="valuation" value= <%= startup.valuation %>>
+
+    <label for="international">Role of Founder</label>
+    <br>
+    <input type="radio" id="international" name="role" value="international" checked>
+    <label for="international">International</label><br>
+    <input type="radio" id="national" name="role" value="national" checked>
+    <label for="national">National</label><br>
+    <input type="radio" id="province" name="role" value="province" checked>
+    <label for="province">Province</label>
+        
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+<!-- ejs date -->
+<script>
+    document.getElementById("date").valueAsDate = new Date();
+</script>
+</body>
+</html>

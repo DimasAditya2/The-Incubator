@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Incubator</title>
+    <!-- fonts google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- end font  -->
+    <style> 
+    body {
+        font-family: "Poppins", sans-serif;
+        font-size: 75%;
+        background-color: #f5f5f5;
+    }
+    h3 a {
+        background-color: dodgerblue;
+        padding: 10px 20px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+    
+    .table-wrapper {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 20vh;
+        }
+
+        .table-wrapper tr #detail {
+            background-color: dodgerblue;
+            padding: 10px 20px;
+            color: #fff;
+            border-radius: 0.6rem;
+        }
+
+        .table-wrapper tr .detail a:hover {
+            background-color: rgb(13, 61, 108);
+        }
+
+        tr:nth-child(even) {
+            background-color: #ccc;
+        }
+        
+        span {
+            visibility: hidden;
+        }
+
+        th {
+            border-bottom: 2px solid black;
+            padding: 10px;
+            font-size: 1.3rem;
+        }
+
+        td {
+            text-align: center;
+            padding: 15px;
+            font-size: 1rem;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        /* responsive */
+        @media screen and (max-width: 1000px) {
+
+            body {
+                font-size: 100%;
+                background-color: grey;
+            }
+
+            th {
+                font-size: 0.9rem;
+            }
+
+            td {
+                font-size: 0.8rem;
+            }
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    
+    <h1><%= incubator.name %></h1>
+    <h2>Code of incubator: <%= incubator.code %></h2>
+
+    <h3>Click <a href="/incubators/<%= incubator.id %>/startUp/add">Add</a> to add StartUp</h3>
+    <% if(incubator.Startups.length) { %>
+        <div class="table-wrapper">
+
+            <table>
+                <tr>
+                    <th>Start-Up Name</th>
+                    <th>Founder Name</th>
+                    <th>Age</th>
+                    <th>Education</th>
+                    <th>Role of founder</th>
+                    <th>Valuation</th>
+                    <th>Action</th>
+                </tr>
+                <% incubator.Startups.forEach(el => { %>
+                <tr>
+                        <td> <%= el.startUpName %> </td>
+                        <td> <%= el.founderName %> </td>
+                        <td> <%= el.getAge() %> </td>
+                        <td> <%= el.educationOfFounder %> </td>
+                        <td> <%= el.roleOfFounder %> </td>
+                        <td> <%= formatter(el.valuation) %> </td>
+                        <td><a href="/incubators/<%= incubator.id %>/startUp/<%= el.id %>/edit" id="detail" title="show detail" >Edit</a> <span>A</span> <a href="<%= incubator.id %>/startup/<%= el.id %>/delete" id="detail" title="show detail" >Delete</a></td>   
+
+                    </tr>
+            <% }) %>    
+            </table>
+            <% let output = 0 %>
+        </div>
+            <% incubator.Startups.forEach(el => { %>
+                <% output += el.valuation %>
+            <% }) %>
+            <p style="margin: 0 20px; font-weight: bold; font-size: 0.8rem;">Valuation of incubator: <%= formatter(output) %></p>
+
+    <% } else { %>
+        <p>There is no StartUp yet</p>
+        <h3>Valuation All Start-Up: -</h3>
+   <% } %>
+    
+         
+
+    
+
+</body>
+</html>

@@ -1,4 +1,6 @@
 const {Incubator, Startup} = require("../models/index")
+const formatter = require("../helper/formatCurrency")
+
 
 
 class Controller {
@@ -11,6 +13,20 @@ class Controller {
             res.send(error)
         }
     }   
+
+    // ? show startup
+    static async showStartUp(req, res) {
+        try {
+            let data;
+            const {filter} = req.query
+            data = await Startup.getStartUpByRoleOfFounder(filter)
+            
+            res.render('allStartup', {data, formatter})
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
 
     // ? add incubator
     static async renderAdd(req, res) {
@@ -93,6 +109,90 @@ class Controller {
             }
         }
     }
+
+    static async detail(req, res) {
+        try {
+            const {incubatorId} = req.params
+            let incubator = await Incubator.findByPk(incubatorId, {
+                include: [Startup]
+            })
+            // console.log(incubator)
+            // console.log(incubator, "<--")
+            res.render('detailIncubator', {incubator, formatter})
+            
+            // res.send(incubator)
+        } catch (error) {
+            res.send(error)
+        }
+    }
+    
+    static async renderEdit(req, res) {
+        try {
+            let {incubatorId, startUpId} = req.params
+            let {errors} = req.query
+            let incubator = await Incubator.findByPk(incubatorId)
+            let startup = await Startup.findByPk(startUpId)
+            // res.send(startup)
+            res.render('editStartup', {incubator, startup, errors})
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async handlerEdit(req, res) {
+        try {
+            const { incubatorId, startUpId } = req.params;
+            const { name, founder, date, education, role, valuation } = req.body;
+        
+            await Startup.update({
+                startUpName: name,
+                founderName: founder,
+                dateFound: date,
+                educationOfFounder: education,
+                roleOfFounder: role,
+                IncubatorId: incubatorId, 
+                valuation
+            }, {
+                where: { id: startUpId } 
+            });
+        
+            res.redirect(`/incubators/${incubatorId}`);
+        } catch (error) {
+            // console.log(error.errors);
+            // console.log(error);
+            const { incubatorId, startUpId } = req.params;
+        
+            if (error.name === 'SequelizeValidationError') { 
+                let errors = error.errors.map(el => el.message);
+                // console.log(errors);
+                
+                res.redirect(`/incubators/${incubatorId}/startUp/${startUpId}/edit?errors=` + errors);
+                // console.log('jalan bro');
+                
+            } else {
+                res.send(error);
+            }
+        }
+        
+    }
+
+    // ! delete
+    static async deleteStartUp(req, res) {
+        try {
+            const {incubatorId, startUpId} = req.params
+
+            await Startup.destroy({
+                where: {
+                    IncubatorId: incubatorId,
+                    id: startUpId
+                }
+            })
+            res.redirect(`/incubators/${incubatorId}`)
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
 }
 
 module.exports = Controller

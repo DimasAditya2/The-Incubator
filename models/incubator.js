@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Incubator.hasMany(models.Startup, {foreignKey: 'IncubatorId'})
+
     }
   }
   Incubator.init({
