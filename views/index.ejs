@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+    <!-- fonts google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- end font  -->
+    <style>
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: dodgerblue;
+            gap: 1rem;
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: 0.3s linear;
+        }
+
+        .navbar a:hover {
+            color: #ccc;
+            text-decoration: underline;
+        }
+
+        .navbar .logo {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .navbar .active {
+            color: yellowgreen;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .navbar .link {
+            display: flex;
+            /* flex-wrap: wrap; */
+            align-content: center;
+            padding: 0 20px;
+            gap: 1rem;
+        }
+        
+        .table-wrapper {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 40vh;
+            overflow-y: scroll;
+        }
+
+        .table-wrapper tr #detail {
+            background-color: dodgerblue;
+            padding: 10px 20px;
+            color: #fff;
+            border-radius: 0.6rem;
+        }
+
+        .table-wrapper tr .detail a:hover {
+            background-color: rgb(13, 61, 108);
+        }
+
+        tr:nth-child(even) {
+            background-color: #ccc;
+        }
+
+        th {
+            border-bottom: 2px solid black;
+            padding: 10px;
+            font-size: 1.4rem;
+        }
+
+        td {
+            text-align: center;
+            padding: 15px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+    </style>
+</head>
+<body style="background-color: #f5f5f5;">
+    <div class="navbar">
+        <a href="#" class="logo">The incubator</a>
+
+        <div class="link">
+            <a href="/" class="active">Home</a>
+            <a href="/incubators/add">Add New Incubator</a>
+            <a href="/startup">Start Startup</a>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Location</th>
+                <th>Level</th>
+                <th>Action</th>
+            </tr>
+            <% data.forEach(el => { %>
+            <tr>
+                <td><%= el.name %></td>
+                <td><%= el.code %></td>
+                <td><%= el.location %></td>
+                <td><%= el.level %></td>
+                <td><a href="/incubators/<%= el.id %>" id="detail" title="show detail" >Show Detail</a></td>
+             
+                
+            </tr>
+            <% }) %>
+
+    
+        </table>
+
+    </div>
+</body>
+</html>

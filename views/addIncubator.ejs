@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Incubator</title>
+    <!-- fonts google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- end font  -->
+<style>
+
+
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #ccc;
+}
+
+h1, p    {
+    text-align: center;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 40px;
+    background-color: #f2f2f2;
+    border-radius: 0 0 10px 10px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background-color: dodgerblue;
+    gap: 1rem;
+    width: 57%;
+    border-radius: 10px 10px 0 0;
+}
+
+.navbar a {
+  color: #fff;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: 0.3s linear;
+}
+
+.navbar a:hover {
+  color: #ccc;
+  text-decoration: underline;
+}
+
+.navbar .logo {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.navbar .active {
+  color: yellowgreen;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.navbar .link {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 0 20px;
+  gap: 1rem;
+}
+
+.header {
+    background-color: #eee;
+    width: 57%;
+    margin: 0 auto;
+    height: 100%;
+    padding: 20px 0;
+}
+
+input[type=text], select, input[type=number] {
+  width: 100%;
+  font-size: 1rem;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=text]:hover, input[type=number]:hover, input[type=date]:hover, select:hover {
+  border: 1px solid dodgerblue;
+}
+
+input[type=date] {
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  transform: scale(3); 
+  margin-right: 10px;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: dodgerblue;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 14px 20px;
+  margin: 30px 0 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.4s ease-in;
+}
+
+input[type=submit]:hover {
+  background-color: darkblue;
+  color: #ccc;
+}
+
+
+
+
+
+
+
+</style>
+</head>
+
+<body>
+
+<!-- ?navbar -->
+<div class="navbar">
+    <a href="/" class="logo">The incubator</a>
+
+    <div class="link">
+        <a href="/">Home</a>
+        <a href="/incubators/add" class="active">Add New Incubator</a>
+        <a href="/startup">Startup</a>
+    </div>
+</div>
+<!-- ? end navbar -->
+
+<div class="header">
+    <h1>Create New Incubator</h1>
+    <p><b>Please Fill the form below to add a new Incubator!</b></p>
+</div>
+
+<div class="container">
+  <form action="/incubators/add" method="post">
+    <label for="name">The Name of The Incubator?</label>
+    <input type="text" id="name" name="name">
+
+    <label for="location">location The Location The Incubator?</label>
+    <input type="text" id="location" name="location">
+
+  
+    <!-- <select name="education" id="education">
+      <option value="SMK">SMK/SMA</option>
+      <option value="S1">S1</option>
+      <option value="S2">S2</option>
+      <option value="S3">S3</option>
+    </select> -->
+
+    
+
+    <label for="international">The Level of The Incubator?</label>
+    <br>
+    <input type="radio" id="international" name="level" value="International" checked>
+    <label for="international">International</label><br>
+    <input type="radio" id="national" name="level" value="National" checked>
+    <label for="national">National</label><br>
+    <input type="radio" id="province" name="level" value="Province" checked>
+    <label for="province">Province</label>
+        
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
